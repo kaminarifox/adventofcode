@@ -1023,65 +1023,65 @@ let dur = {}
 let maxDur = {id: 0, value: 0};
 
 arr.forEach(time => {
-        
+
     timeline = new Array(61).fill('.');
     const action = time.split(' ').pop();
-    
-    
-    if (action === 'shift') {
-        id = time.match(/#\d+/g).pop().slice(1);        
-    }
 
-    if (action === 'asleep') {
-        sleepBeg = +(time.match(/\d\d:\d\d/g).pop().split(':').pop());
-    }
 
-    if (action === 'up') {
-        const sleepEnd = +(time.match(/\d\d:\d\d/g).pop().split(':').pop());
-        
-        let stime = (60 - sleepBeg) - (60 - sleepEnd);
-        if (dur[id]) {
+    switch (action) {
+        case 'shift':
+            id = time.match(/#\d+/g).pop().slice(1);
+            break;
+        case 'asleep':
+            sleepBeg = +(time.match(/\d\d:\d\d/g).pop().split(':').pop());
+            break;
+        case 'up':
+            const sleepEnd = +(time.match(/\d\d:\d\d/g).pop().split(':').pop());
+            let stime = (60 - sleepBeg) - (60 - sleepEnd) -1;
+
+            if (!dur[id]) {
+                dur[id] = {value: 0};
+            }
             dur[id].value += stime;
-        } else {
-            dur[id] = {};
-            dur[id].value = stime;
-        }
-        
-        if (dur[id].value > maxDur.value) {
-            maxDur = {id: id, value: dur[id].value};
-        }
-        
-        while (stime) {
-            timeline[sleepBeg + stime - 1] = '#';
-            stime--;
-        }
+
+            if (dur[id].value > maxDur.value) {
+                maxDur = {id: id, value: dur[id].value};
+            }
+
+            while (stime--) {
+                timeline[sleepBeg + stime - 1] = '#';
+            }
+
+            break;
+        default:
+            break
     }
-    
+
     timeline[60] = id;
     dates.push(timeline);
 });
 
 console.log(maxDur);
 dates.forEach(date => {
-    
+
    if (date[60] == 1987) {
     console.log(date.join(''));
    }
-       
+
 })
 
 for (let i = 0; i < 60; i++) {
-    
+
     counter = 0;
-    
-    
+
+
     dates.forEach(date => {
-        
+
         if (date[i] == '#' && date[60] == 1987 ) {
             counter++;
         }
     });
-    
+
     console.log([i, counter])
 }
 
