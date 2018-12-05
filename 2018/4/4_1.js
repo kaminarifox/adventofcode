@@ -1037,7 +1037,7 @@ arr.forEach(time => {
             break;
         case 'up':
             const sleepEnd = +(time.match(/\d\d:\d\d/g).pop().split(':').pop());
-            let stime = (60 - sleepBeg) - (60 - sleepEnd) -1;
+            let stime = (60 - sleepBeg) - (60 - sleepEnd) - 1;
 
             if (!dur[id]) {
                 dur[id] = {value: 0};
@@ -1049,7 +1049,7 @@ arr.forEach(time => {
             }
 
             while (stime--) {
-                timeline[sleepBeg + stime - 1] = '#';
+                timeline[sleepBeg + stime] = '#';
             }
 
             break;
