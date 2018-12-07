@@ -1,22 +1,26 @@
-const fs = require('fs');
+import fs from 'fs';
 
-let arr = fs.readFileSync('in.txt', 'utf8').trim().split('\n');
+let input =
+`Step C must be finished before step A can begin.
+Step C must be finished before step F can begin.
+Step A must be finished before step B can begin.
+Step A must be finished before step D can begin.
+Step B must be finished before step E can begin.
+Step D must be finished before step E can begin.
+Step F must be finished before step E can begin.`.split('\n');
 
-let out = "";
+let out = '';
 
+input.forEach(item => {
 
-arr.forEach(step => {
+    const step = item.match(/[A-Z]/g);
+    let s1 = step[1], s2 = step[2];
 
-    const steps = step.match(/[A-Z]/g);
-    
-    s2 = steps.pop();
-    s1 = steps.pop();
-    
-    let i = out.indexOf(s1);
-    if (i === -1) {    
+    if (!out.length) {
         out += s1;
-    } else {
-        
     }
-});
 
+    input.forEach(item2 => {
+
+    });
+});
