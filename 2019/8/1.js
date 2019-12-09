@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const w = 25, h = 6;
-const input = fs.readFileSync('/home/neroshigure/Projects/adventofcode/2019/8/input', {encoding: 'utf-8'});
+const input = fs.readFileSync(__dirname + '/input', {encoding: 'utf-8'});
 const totalLayers = input.length / (w * h);
 
 let layers = [];
@@ -23,7 +23,7 @@ layers = layers.sort((a, b) => {
     return a.zeros - b.zeros;
 });
 
-const out = layers[1].layer.filter(item => item === 1).length 
+const out = layers[1].layer.filter(item => item === 1).length
     * layers[1].layer.filter(item => item === 2).length;
 
 console.log(out);
