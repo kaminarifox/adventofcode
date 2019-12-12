@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void loadCode(int* buffer, int* len) {
+void loadCode(int** buffer, int* len) {
     FILE *fptr = fopen("./input", "r");
     if (fptr == NULL) {
         printf("Input file not found!\n");
@@ -10,31 +10,30 @@ void loadCode(int* buffer, int* len) {
     }
 
     char opcode[10] = "";
-    buffer = malloc(sizeof(int));
-    *len = 1;
+    *buffer = malloc(0);
+    *len = 0;
 
-    while (1) {
-        char c = fgetc(fptr);
-        if (c == ',' || c == EOF) {
-            buffer[*len - 1] = atoi(opcode);
-            printf("%d ",  buffer[*len - 1]);
-            // FIXME: Remove realloc on EOF
-            buffer = realloc(buffer, (*len + 1) * sizeof(int));
-            *len += 1;
-            opcode[0] = '\0';
-        } else {
+    char c;
+    do {
+        c = fgetc(fptr);
+        if (c != ',' && c != EOF) {
             strncat(opcode, &c, 1);
+        } else {
+            printf("%d", *len);
+            *buffer[*len] = 1; //atoi(opcode);
+            *len += 1;
+            *buffer = (int*) realloc(*buffer, 1000 * sizeof(int));
+            opcode[0] = '\0';      
         }
+      
+    } while (c != EOF);
+    
+    fclose(fptr);
 
-        if (c == EOF) {
-            fclose(fptr);
-            break;
-        }
-    }
 }
 
 void main() {
     int* buffer;
     int len;
-    loadCode(buffer, &len);
+    loadCode(&buffer, &len);
 }
