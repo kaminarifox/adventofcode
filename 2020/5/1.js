@@ -14,8 +14,10 @@ const seatsIds = input.map(seatToId);
 console.log(Math.max(...seatsIds));
 
 // Second puzzle
-for (let i = 0; i < 127 * 7; i++) {
-    if (!seatsIds.includes(i)) {
-        console.log(i);
+for (let i = 1; i < 126; i++) {
+    for (let j = 0; j < 7; j++) {
+        if (!seatsIds.includes(i * 7 + j)) {
+            console.log(i * 7 + j);
+        }
     }
 }
