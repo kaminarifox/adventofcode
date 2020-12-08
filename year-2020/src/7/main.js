@@ -16,11 +16,11 @@ input.forEach((rule, index) => {
     }
 });
 
-function volume(colorIndex) {
+function depth(colorIndex) {
     let bags = [];
     for (let i = 0; i < input.length; i++) {
         if (rulesTable[i][colorIndex] > 0) {
-            bags = [i, ...bags, ...volume(i)];
+            bags = [i, ...bags, ...depth(i)];
         }
     }
 
@@ -40,7 +40,7 @@ function capacity(colorIndex, parentCapacity = 1) {
 }
 
 // First puzzle
-console.log(new Set(volume(colorMap[myColor])).size);
+console.log(new Set(depth(colorMap[myColor])).size);
 
 // Second puzzle
 console.log(capacity(colorMap[myColor]));
