@@ -8,6 +8,10 @@ edition = "2018"
 name = "6"
 path = "src/6/main.rs"
 
+[[bin]]
+name = "8"
+path = "src/8/main.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
