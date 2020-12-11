@@ -63,9 +63,6 @@ impl Cpu {
 }
 
 fn main() {
-    // let mut buffer = String::new();
-    // io::stdin().lock().read_to_string(&mut buffer).unwrap();
-
     // First puzzle
     let mut cpu = Cpu::init(INPUT);
     cpu.run();
