@@ -49,15 +49,6 @@ do {
     });
 
     places.forEach(row => row.forEach(p => p.seatState = p.nextState));
-
-    places.forEach(row => {
-        let str = "";
-        row.forEach(p => {
-            if (p.seatState === 1) str += '#'
-            if (p.seatState === 0) str += 'L'
-            if (p.seatState === null) str += '.'
-        })
-    })
 } while (changes !== prevChanges);
 
 
