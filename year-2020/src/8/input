@@ -624,3 +624,4 @@ acc +30
 acc +26
 jmp +1
 jmp +1
+end 0
