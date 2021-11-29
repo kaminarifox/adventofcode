@@ -1,4 +1,5 @@
 use std::fs;
+use std::process;
 
 #[derive(Debug)]
 enum Direction {
@@ -28,15 +29,34 @@ impl Direction {
 fn main() {
     let input = fs::read_to_string("./input.txt").unwrap().trim_end().to_string();
     let mut coords = (Direction::T, 0, 0);
+    let mut path: Vec<(i32, i32)> = vec!();
 
+    path.push((0,0));
     for action in input.split(", ") {
         coords.0 = if action.starts_with("R") { coords.0.next() } else { coords.0.prev() };
         let steps = (&action[1..]).parse::<i32>().unwrap_or(0);
-        match coords.0 {
-            Direction::T => coords.2 += steps,
-            Direction::R => coords.1 += steps,
-            Direction::D => coords.2 -= steps,
-            Direction::L => coords.1 -= steps,
+
+        for _i in 0..steps {
+            match coords.0 {
+                Direction::T => coords.2 += 1,
+                Direction::R => coords.1 += 1,
+                Direction::D => coords.2 -= 1,
+                Direction::L => coords.1 -= 1,
+            }
+
+            // Second part
+            if true {
+                let second_visited = path.iter().position(|i| i.0 == coords.1 && i.1 == coords.2);
+                match second_visited {
+                    None => (),
+                    Some(i) => {
+                        println!("{:?}", path[i]);
+                        process::exit(0);
+                    },
+                };
+            }
+
+            path.push((coords.1, coords.2));
         }
     }
 
