@@ -52,15 +52,15 @@ fn part_two(input: Vec<i32>) -> i32 {
         }
 
         if mc_criteria.0 > mc_criteria.1 {
-            most_common = most_common.into_iter().filter(|x| *x & (1 << i) == 0).collect();
+            most_common = most_common.into_iter().filter(|x| x & (1 << i) == 0).collect();
         } else {
-            most_common = most_common.into_iter().filter(|x| *x & (1 << i) != 0).collect();
+            most_common = most_common.into_iter().filter(|x| x & (1 << i) != 0).collect();
         }
 
         if lc_criteria.0 > lc_criteria.1 {
-            less_common = less_common.into_iter().filter(|x| *x & (1 << i) != 0).collect();
+            less_common = less_common.into_iter().filter(|x| x & (1 << i) != 0).collect();
         } else {
-            less_common = less_common.into_iter().filter(|x| *x & (1 << i) == 0).collect();
+            less_common = less_common.into_iter().filter(|x| x & (1 << i) == 0).collect();
         }
 
         if most_common.len() == 1 {
