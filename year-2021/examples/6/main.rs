@@ -4,7 +4,7 @@ use std::fs;
 const FISH_DAYS: i32 = 256;
 
 fn main() {
-    let input = fs::read_to_string("./input.txt").unwrap().trim_end().to_string();
+    let input = fs::read_to_string("examples/6/input.txt").unwrap().trim_end().to_string();
     let sushi_set: Vec<i32> = input.split(",").map(|x| x.parse::<i32>().unwrap()).collect();
 
     fn count_fishes(fish: i32, initial_day: i32) -> u128 {

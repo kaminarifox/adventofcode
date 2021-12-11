@@ -1,0 +1,7 @@
+[package]
+name = "advent_of_code_2021"
+version = "0.1.0"
+authors = ["Kaminarifox <kaminarifox@gmail.com>"]
+
+[dependencies]
+regex = "1.5.4"
