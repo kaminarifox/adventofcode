@@ -24,26 +24,34 @@ let steps = input.reduce((p, [dir, steps]) => {
     return p;
 }, [{x: 0, y: 0}]);
 
-let head = steps[0];
-let tail = steps[0];
+let tails = new Array(10).fill(steps[0]);
 steps.forEach((step, index) => {
-    head = step;
-    if (
-        !(
-            cmp(tail, head)
-            || cmp({x: tail.x, y: tail.y + 1}, head)
-            || cmp({x: tail.x + 1, y: tail.y}, head)
-            || cmp({x: tail.x - 1, y: tail.y}, head)
-            || cmp({x: tail.x, y: tail.y - 1}, head)
-            || cmp({x: tail.x + 1, y: tail.y + 1}, head)
-            || cmp({x: tail.x + 1, y: tail.y - 1}, head)
-            || cmp({x: tail.x - 1, y: tail.y + 1}, head)
-            || cmp({x: tail.x - 1, y: tail.y - 1}, head)
-        )
-    ) {
-        tail.tailed = true;
-        tail = steps[index - 1];
+
+    for (let i = 1; i < 10; i++) {
+        const prevStep = tails[i - 1];
+        tails[0] = step;
+        if (
+            !(
+                cmp(tails[i], tails[i - 1])
+                || cmp({x: tails[i].x, y: tails[i].y + 1}, tails[i - 1])
+                || cmp({x: tails[i].x + 1, y: tails[i].y}, tails[i - 1])
+                || cmp({x: tails[i].x - 1, y: tails[i].y}, tails[i - 1])
+                || cmp({x: tails[i].x, y: tails[i].y - 1}, tails[i - 1])
+                || cmp({x: tails[i].x + 1, y: tails[i].y + 1}, tails[i - 1])
+                || cmp({x: tails[i].x + 1, y: tails[i].y - 1}, tails[i - 1])
+                || cmp({x: tails[i].x - 1, y: tails[i].y + 1}, tails[i - 1])
+                || cmp({x: tails[i].x - 1, y: tails[i].y - 1}, tails[i - 1])
+            )
+        ) {
+            if (i === 9) {
+                tails[i].tailed = true;
+            }
+            tails[i] = prevStep;
+            break;
+        }
     }
+
+    console.log(tails);
 });
 
 console.log((new Set([...steps.filter(s => s.tailed).map(s => `${s.x}${s.y}`)])).size);
