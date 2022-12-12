@@ -1,44 +1,8 @@
-let input = `abcccccaaaccccaacaaccaaaaaaaaaaaaaaaaaaaaccccccccccccccccccccccccccccccccccaaaaaa
-abcccccaaaacccaaaaaccaaaaaaaaaaaaaaaaaaaaacccccccccccccccccccccccccccccccccccaaaa
-abcccccaaaaccaaaaaccccaaaccaaaaaacccacaaaaccccccccccccccccaaaccccccccccccccccaaaa
-abcccccaaacccaaaaaaccccccccaaaaaacccccaaccccccccccccccccccaaaccccccccccccccccaaaa
-abcccccccccccccaaaacccccccaaaaaaaaccccccccccccccccccccccccaaacccccccccccccccaaaaa
-abccccccaacccccaacccccccccaaaaaaaaccccccccccccccccccccccccaaaaccaaacccccccccccccc
-abccccccaacccccccccccccccaaacccaaaacccaacaaccccccccccacaccaaacaajaacccccccccccccc
-abcccaaaaaaaaccccacccccccaaaccccaaacccaaaaaccccccccccaaaaaaajjjjkkkccccccaacccccc
-abcccaaaaaaaacaaaacccccccccccccccccccaaaaaccccccccciiiijjjjjjjjjkkkkcaaaaaacccccc
-abcccccaaaacccaaaaaacccccccccccccccccaaaaaacccccciiiiiijjjjjjjrrrkkkkaaaaaaaacccc
-abcccccaaaaacccaaaacccccccccaacccccccccaaaaccccciiiiiiiijjjjrrrrrsskkaaaaaaaacccc
-abccccaaaaaaccaaaaacccccccccaaaacccccccaccccccciiiiqqqqrrrrrrrrrssskkkaaaaaaacccc
-abaaccaaccaaccaacaacccccccaaaaaaccccccccccccccciiiqqqqqrrrrrrruussskkkaaaaacccccc
-abaaaacccccccccccccccccccccaaaaccccccccaaaccccciiqqqqqttrrrruuuuussskkaaaaacccccc
-abaaaacccccccccccccccccccccaaaaaccccccccaaaaccchiqqqtttttuuuuuuuussskkcccaacccccc
-abaaacccccaaaccacccccccccccaacaaccccccaaaaaaccchhqqqtttttuuuuxxuussslllcccccccccc
-abaaaaccccaaaaaacaaccccccaccccccccccccaaaaacccchhqqqttxxxxuuxxyyusssllllccccccccc
-abacaaccccaaaaaacaaaaaaaaaaccccccccccccaaaaaccchhqqqttxxxxxxxxyuusssslllccccccccc
-abcccccccaaaaaaacaaaaaaaaaccccaacccccccaaccaccchhhqqtttxxxxxxyyvvvsssslllcccccccc
-abcccccccaaaaaaaaaaaaaaaaaccccaaaaccccccccccccchhhppqttxxxxxyyyvvvvsqqqlllccccccc
-SbcccaaccaaaaaaaaaaaaaaaaaacaaaaaacccccccccccchhhhpptttxxxEzzyyyyvvvqqqqlllcccccc
-abcccaaccccaaacaaaaaaaaaaaaacaaaaccccccccccccchhhppptttxxxyyyyyyyyvvvqqqlllcccccc
-abaaaaaaaacaaacaaaaaaaaaaaaacaaaaacaaccccccccchhpppsssxxyyyyyyyyvvvvvqqqlllcccccc
-abaaaaaaaaccccccccaaacaaaccccaacaaaaaccccccaagggpppsswwwwwwyyyvvvvvvqqqmmmmcccccc
-abccaaaaccccaacaacaaacaaacccccccccaaacaaaccaagggppssswwwwwwyyywvvqqqqqqmmmccccccc
-abcaaaaaccccaaaaacaaccaaccaaaccaaaaaaaaaaaaaagggppsssswwwswwyywvrqqqqmmmmcccccccc
-abcaaaaaaccaaaaacccccccccaaaaccaaaaaaaaaacaaagggpppssssssswwwwwwrrqmmmmmccccccccc
-abcaacaaaccaaaaaaccccccccaaaaccccaaaaaacccaaagggppppssssssrwwwwrrrmmmmmdccccccccc
-abccccaaaccaaaaaaccccccccaaaaccccaaaaaacccaacggggpooooooosrrwwwrrnmmmddddcacccccc
-abccccaaaaaaaacccccccccccccccccccaaaaaaaccccccggggoooooooorrrrrrrnnmdddddaaaacccc
-abcccccaaaaaaccccccccccccccccccccaaacaaacccccccggggfffooooorrrrrrnnddddaaaaaacccc
-abccaaaaaaaacccccccccccccccccccccaccccccccccccccggffffffooonrrrrnnndddaaaaaaacccc
-abccaaaaaaaaaccccaacccccccccccccccccccccccccccccccfffffffoonnnnnnndddcaaaaacccccc
-abccaaaaaaaaaacccaaccccccccccccccaccccccccccccccccccccffffnnnnnnnedddaaaaaacccccc
-abcccccaaaaaaaaaaaacccccccaccccaaacccccccccccccccccccccfffeennnneeedcccccaacccccc
-abcccccaaacccaaaaaaaaccccaaacccaaaccacccccccccccccccccccafeeeeeeeeecccccccccccccc
-abcccccaaccccaaaaaaaaacccaaaaaaaaaaaaccccccaaaccccccccccaaeeeeeeeeeccccccccccccca
-abaccccccccccaaaaaaaaacccaaaaaaaaaaacccccccaaaaacccccccaaaaceeeeecccccccccccaccca
-abaccccccccccaaaaaaaaccaaaaaaaaaaaaaacccccaaaaaccccccccaaaccccaaacccccccccccaaaaa
-abaccccccccccaaaaaaacccaaaaaaaaaaaaaacccccaaaaacccccccccccccccccccccccccccccaaaaa
-abaccccccccccaccaaaacccaaaaaaaaaaaaaaccccccaaaaaccccccccccccccccccccccccccccaaaaa`.trim().split('\n').map(x => x.split('').map(x => x.charCodeAt(0)));
+let input = `Sabqponm
+abcryxxl
+accszExk
+acctuvwj
+abdefghi`.trim().split('\n').map(x => x.split('').map(x => x.charCodeAt(0)));
 
 class Point {
     constructor(i, j, h) {
@@ -75,6 +39,7 @@ input = input.map((row, i) => {
 });
 const startPoint = input.flat().find(x => x.h === 'S'.charCodeAt(0));
 const endPoint = input.flat().find(x => x.h === 'E'.charCodeAt(0));
+endPoint.h = 122;
 for (let i = 0; i < input.length; i++) {
     for (let j = 0; j < input[0].length; j++) {
         const links = [];
@@ -88,7 +53,7 @@ for (let i = 0; i < input.length; i++) {
             links.push(input[i][j + 1]);
 
         links.forEach(l => {
-            if (input[i][j].getLinkWeight(l) <= 1) {
+            if (input[i][j].h - l.h >= -1) {
                 input[i][j].addLink(l);
             }
         })
@@ -96,8 +61,7 @@ for (let i = 0; i < input.length; i++) {
 }
 startPoint.score = 0;
 
-// console.log(input.flat().find(x => x.links.size === 0));
-// process.exit(0);
+process.exit(0);
 
 // Apply Dijkstra algo
 function findScores(point) {
@@ -114,29 +78,30 @@ function findScores(point) {
     point.isVisited = true;
 
     // START Print
-    console.clear();
-    let out = '';
-    for (let i = 0; i < input.length; i++) {
-        for (let j = 0; j < input[0].length; j++) {
-            out += input[i][j].isVisited ? '+' : '#';
-        }
-        out += '\n';
-    }
-    process.stdout.write(out);
-    for (let i = 0; i < 30000000; i++);
+    // console.clear();
+    // let out = '';
+    // for (let i = 0; i < input.length; i++) {
+    //     for (let j = 0; j < input[0].length; j++) {
+    //         out += input[i][j].isVisited ? '+' : '#';
+    //     }
+    //     out += '\n';
+    // }
+    // process.stdout.write(out);
+    // for (let i = 0; i < 1000000; i++);
     // END Print
 }
 findScores(startPoint);
+
 // Find path
-// function findPath(point, prevPoint) {
-//     const path = '';
-//     const links = [...point.links].sort((a, b) => a.score - b.score);
-//     const nextPoint = links.find(p => p !== endPoint && p !== prevPoint);
-//     if (point === startPoint) {
-//         return;
-//     }
-//     findPath(nextPoint, point);
-//     console.log(point.i, point.j);
-// }
-// const p = findPath(endPoint);
+function findPath(point, prevPoint) {
+    const path = '';
+    const links = [...point.links].sort((a, b) => a.score - b.score);
+    const nextPoint = links.find(p => p !== endPoint && p !== prevPoint);
+    if (point === startPoint) {
+        return;
+    }
+    findPath(nextPoint, point);
+    console.log(point.i, point.j);
+}
+const p = findPath(endPoint);
 
