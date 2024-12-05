@@ -1,0 +1,17 @@
+{
+  "name": "aoc2024",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "AOC_TEST=true node src/index",
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {},
+  "dependencies": {
+    "mathjs": "^14.0.0"
+  }
+}
