@@ -9,7 +9,7 @@ const input = await AOCInput.fetch({
     day,
     session: process.env.AOC_TOKEN,
     raw: process.env.AOC_TEST && await readFile(`src/${day}/test.txt`, { encoding: 'utf-8' }),
-    parser: parseInt,
+    parser: String,
 })
 
 puzzle.main(input, part);

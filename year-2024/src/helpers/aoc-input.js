@@ -20,6 +20,12 @@ export class AOCInput {
         return new AOCInput(params);
     }
 
+    set settings(s) {
+        this.#parser = s.parser ?? this.#parser;
+        this.#rowsDelimiter = s.rowsDelimiter ?? this.#rowsDelimiter;
+        this.#colsDelimiter = s.colsDelimiter ?? this.#colsDelimiter;
+    }
+
     get text() {
         return this.#raw;
     }
